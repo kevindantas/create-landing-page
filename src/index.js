@@ -11,16 +11,16 @@ var argv = minimist(process.argv.slice(2));
 
 const { log, error } = console;
 
+const appName = argv._.pop();
 
-const appName = process.argv.slice(2);
+createLanding(appName);
 
-const creating = createLanding(appName)
-creating.next();
-
-function* createLanding(name) {
+function createLanding(name) {
   // Check if exists a folder with the given app name
-  checkAppName(appName);
-  inquirer.prompt(questions)
-    .then(answers => generator(answers))
-    .catch(err => error(err));
+  checkAppName(appName).then(() => {
+    inquirer
+      .prompt(questions)
+      .then(answers => generator(answers))
+      .catch(err => error(err));
+  });
 }
