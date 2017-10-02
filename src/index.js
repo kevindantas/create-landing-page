@@ -20,7 +20,7 @@ function createLanding(name) {
   checkAppName(appName).then(() => {
     inquirer
       .prompt(questions)
-      .then(answers => generator(answers))
+      .then(answers => generator(appName, answers))
       .catch(err => error(err));
   });
 }

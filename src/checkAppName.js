@@ -35,7 +35,7 @@ function askForOvewrite(name) {
  * @param {String} name Folder name
  */
 function generateAppFolder(name) {
-  fs.ensureDirSync(name);
+  console.log(fs.ensureDirSync(name));
   console.log(chalk.green('Folder ready!'));
 }
 

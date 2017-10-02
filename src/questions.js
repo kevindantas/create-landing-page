@@ -3,7 +3,7 @@
  */
 const questions = [{
   type: 'list',
-  name: 'templating-engine',
+  name: 'templatingEngine',
   message: 'Do you gonna use any templating engine?',
   choices: [{
     name: 'Handlebars',
@@ -20,7 +20,7 @@ const questions = [{
   }]
 }, {
   type: 'list',
-  name: 'css-preprocessor',
+  name: 'cssPreprocessor',
   message: 'Want to use a CSS preprocessor?',
   choices: [{
     name: 'Sass',
@@ -37,7 +37,7 @@ const questions = [{
   }]
 }, {
   type: 'list',
-  name: 'task-runner',
+  name: 'taskRunner',
   message: 'Which task runner would you like to use?',
   choices: [{
     name: 'Gulp',
