@@ -8,6 +8,14 @@ const format = require('string-template');
  * @param {Object} options - Options selected by the user to create the scaffold
  */
 function generateScaffold(appName, options) {
+  const { cssPreprocessor } = options;
+  const styleExtensions = {
+    sass: 'sass',
+    less: 'less',
+    stylus: 'styl',
+  };
+  const styleExtension = styleExtensions[cssPreprocessor];
+
   // Create a folder for the source code
   const folderPath = `./${appName}/`;
   fs.ensureDir(folderPath + 'src');
@@ -16,19 +24,31 @@ function generateScaffold(appName, options) {
 
   // Get template for the package.json
   const package = fs.readFileSync(
-    path.resolve(templatesPath + '/package.json.template'),
+    path.resolve(templatesPath + '/package.json'),
     'utf-8'
   );
 
   // Create package.json
   const packageString = format(package, {
     appName,
-    cssPreprocessor: options.cssPreprocessor,
+    cssPreprocessor,
   });
   fs.writeFileSync(folderPath + '/package.json', packageString);
 
+  // Get the gulpfile
+  const gulpfile = fs.readFileSync(
+    path.resolve(templatesPath + '/gulpfile.js'),
+    'utf-8'
+  );
+
+  // Create gulpfile.js
+  const gulpfileString = format(gulpfile, {
+    styleExtension,
+    cssPreprocessor,
+  });
+  fs.writeFileSync(folderPath + '/gulpfile.js', gulpfileString);
   
-  console.log(packageString);
+  console.log(gulpfileString);
 }
 
 module.exports = generateScaffold;
