@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const chalk = require('chalk');
 const format = require('string-template');
 
 /**
@@ -47,8 +48,13 @@ function generateScaffold(appName, options) {
     cssPreprocessor,
   });
   fs.writeFileSync(folderPath + '/gulpfile.js', gulpfileString);
-  
-  console.log(gulpfileString);
+
+  console.log(chalk.green('Project created!'))
+  console.log(' ');
+  console.log(chalk('Run the following command to start the code:'));
+  console.log(' ');
+  console.log(chalk.white('cd '+chalk.cyan(appName)))
+  console.log(chalk.cyan('yarn start'))
 }
 
 module.exports = generateScaffold;

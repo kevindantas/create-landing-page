@@ -2,9 +2,18 @@
   "name": "create-landing-page",
   "version": "0.0.0",
   "description": "Create a structure for with all the dependecies to create a landing page",
-  "main": "index.js",
-  "author": "Kevin Dantas <kevin.ds.29@gmail.com>",
+  "bugs": "https://github.com/kevindantas/create-landing-page/issues",
   "license": "MIT",
+  "main": "index.js",
+  "author": {
+    "name": "Kevin Dantas",
+    "email": "kevinds29@gmail.com",
+    "url": "https://github.com/kevindantas"
+  },
+  "bin": {
+    "create-landing-page": "./bin/create-landing-page"
+  },
+  "preferGlobal": true,
   "dependencies": {
     "chalk": "^2.1.0",
     "clear": "^0.0.1",
