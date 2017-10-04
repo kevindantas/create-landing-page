@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const minimist = require('minimist');
 const commander = require('commander');
 const questions = require('./questions');
 const generator = require('./generator');
