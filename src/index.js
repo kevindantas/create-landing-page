@@ -8,24 +8,29 @@ const generator = require('./generator');
 const checkAppName = require('./checkAppName');
 const packageJson = require('../package.json');
 
+let appName;
 const program = commander
   .version(packageJson.version)
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')}`)
+  .action(name => {
+    appName = name;
+  })
   .on('--help', () => {
     console.log();
     console.log(`   Only ${chalk.green('<project-directory>')} is needed`);
     console.log();
     console.log('   If you have any problems, feel free to file a issue');
-    console.log(`     ${chalk.cyan('https://github.com/kevindantas/create-landing-page/issues/new')}`)
+    console.log(
+      `     ${chalk.cyan(
+        'https://github.com/kevindantas/create-landing-page/issues/new'
+      )}`
+    );
   })
   .parse(process.argv);
 
-const argv = minimist(process.argv.slice(2));
-const appName = argv._.pop();
-
-if(!appName) {
-  program.help();  
+if (!appName) {
+  program.help();
 }
 
 createLanding(appName);
