@@ -40,6 +40,6 @@ function createLanding(name) {
     inquirer
       .prompt(questions)
       .then(answers => generator(appName, answers))
-      .catch(err => error(err));
+      .catch(err => console.error(err));
   });
 }

@@ -1,0 +1,26 @@
+{
+  "name": "create-landing-page",
+  "version": "0.1.1",
+  "description": "Create modern landing pages with no build configuration.",
+  "bugs": "https://github.com/kevindantas/create-landing-page/issues",
+  "license": "MIT",
+  "scripts": {
+    "cli": "node ./bin/create-landing-page"
+  },
+  "bin": {
+    "create-landing-page": "./bin/create-landing-page"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "clear": "^0.0.1",
+    "commander": "^2.11.0",
+    "fs-extra": "^4.0.2",
+    "inquirer": "^3.2.3",
+    "prettier": "^1.7.3",
+    "string-template": "^1.0.0"
+  },
+  "devDependencies": {
+    "lerna": "^2.11.0"
+  }
+}

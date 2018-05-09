@@ -1,7 +1,8 @@
 {
+  "private": true,
   "name": "create-landing-page",
   "version": "0.1.1",
-  "description": "Create a structure for with all the dependecies to create a landing page",
+  "description": "Create modern landing pages with no build configuration.",
   "bugs": "https://github.com/kevindantas/create-landing-page/issues",
   "license": "MIT",
   "main": "index.js",
@@ -10,17 +11,13 @@
     "email": "kevinds29@gmail.com",
     "url": "https://github.com/kevindantas"
   },
-  "bin": {
-    "create-landing-page": "./bin/create-landing-page"
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
   },
-  "preferGlobal": true,
-  "dependencies": {
-    "chalk": "^2.1.0",
-    "clear": "^0.0.1",
-    "commander": "^2.11.0",
-    "fs-extra": "^4.0.2",
-    "inquirer": "^3.2.3",
-    "prettier": "^1.7.3",
-    "string-template": "^1.0.0"
+  "devDependencies": {
+    "lerna": "^2.11.0"
   }
 }
