@@ -17,7 +17,7 @@ const questions = [{
   }, {
     name: 'No, I\'ll use just HTML',
     value: 'html',
-  }]
+  }],
 }, {
   type: 'list',
   name: 'cssPreprocessor',
@@ -33,19 +33,19 @@ const questions = [{
     value: 'stylus',
   }, {
     name: 'No, I\'ll just use CSS',
-    value: 'css'
-  }]
+    value: 'css',
+  }],
 }, {
   type: 'list',
   name: 'taskRunner',
   message: 'Which task runner would you like to use?',
   choices: [{
     name: 'Gulp',
-    value: 'gulp'
+    value: 'gulp',
   }, {
     name: 'Grunt',
-    value: 'grunt'
-  }]
-}]
+    value: 'grunt',
+  }],
+}];
 
 module.exports = questions;
