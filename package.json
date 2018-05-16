@@ -17,6 +17,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "start": "cd packages/landing-scripts && node bin/landing-scripts.js start",
+    "build": "cd packages/landing-scripts && node bin/landing-scripts.js build",
     "lint": "eslint . --fix"
   },
   "devDependencies": {

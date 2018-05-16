@@ -10,12 +10,24 @@ process.on('unhandledRejection', (err) => {
   throw err;
 });
 
+const args = process.argv.slice(2);
+const scriptName = args[0];
+
+// List of avaliable scripts on landing-scripts
+const avaliableScripts = new Set(['start', 'build', 'deploy']);
+
+// If the script does not exists, show the information and exit the application
+if (!avaliableScripts.has(scriptName)) {
+  console.log(`Unknown script "${scriptName}".`);
+  console.log('For more informantion see: https://github.com/kevindantas/create-landing-page');
+  process.exit(1);
+}
+
 const { spawnSync } = require('child_process');
 
-const scriptPath = require.resolve('../scripts/start.js');
+const scriptPath = require.resolve(`../scripts/${scriptName}.js`);
 
-const child = spawnSync('node', [scriptPath], {
+spawnSync('node', [scriptPath], {
   stdio: 'inherit',
 });
 
-console.log(child);
