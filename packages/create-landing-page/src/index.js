@@ -2,7 +2,6 @@ const chalk = require('chalk');
 const inquirer = require('inquirer');
 const commander = require('commander');
 const questions = require('./questions');
-const generator = require('./generator');
 const checkAppName = require('./checkAppName');
 const packageJson = require('../package.json');
 
@@ -27,12 +26,20 @@ if (!appName) {
   program.help();
 }
 
+function getScriptsPackage() {
+  return `${process.cwd()}/node_modules/landing-scripts/scripts/init.js`;
+}
+
 function createLanding(name) {
   // Check if exists a folder with the given app name
   checkAppName(name).then(() => {
     inquirer
       .prompt(questions)
-      .then(answers => generator(appName, answers))
+      .then(() => {
+        const scriptsPath = getScriptsPackage();
+        const init = require(scriptsPath);
+        init();
+      })
       .catch(err => console.error(err));
   });
 }
