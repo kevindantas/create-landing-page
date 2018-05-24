@@ -1,11 +1,14 @@
 {
   "name": "landing-scripts",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
   "author": "kevindantas",
   "license": "MIT",
+  "bin": {
+    "landing-scripts": "./bin/landing-scripts.js"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
