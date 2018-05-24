@@ -1,6 +1,9 @@
+const fs = require('fs-extra');
+const path = require('path');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const commander = require('commander');
+const { execSync, spawnSync } = require('child_process');
 const questions = require('./questions');
 const checkAppName = require('./checkAppName');
 const packageJson = require('../package.json');
@@ -26,8 +29,48 @@ if (!appName) {
   program.help();
 }
 
-function getScriptsPackage() {
-  return `${process.cwd()}/node_modules/landing-scripts/scripts/init.js`;
+const getAppDir = name => `${process.cwd()}/${name}`;
+
+const getScriptsPackage = () => `${getAppDir()}/node_modules/landing-scripts/scripts/init.js`;
+
+function shouldUseYarn() {
+  try {
+    execSync('yarn --version');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+function buildPackageJson(appDir) {
+  const appPackageJson = {
+    name: appName,
+    version: '0.1.0',
+    private: true,
+  };
+  fs.writeFileSync(
+    path.join(appDir, 'package.json'),
+    JSON.stringify(appPackageJson, null, 2),
+  );
+}
+
+function installDependencies(appDirPath) {
+  let command;
+  let args = [];
+  if (shouldUseYarn()) {
+    command = 'yarn';
+    args = args.concat(['add', '--cwd', appDirPath]);
+  } else {
+    command = 'npm';
+    args = args.concat(['install', '--save', '--prefix', appDirPath]);
+  }
+
+  args.push('landing-scripts');
+
+  spawnSync(command, args, {
+    stdio: 'inherit',
+  });
 }
 
 function createLanding(name) {
@@ -36,9 +79,14 @@ function createLanding(name) {
     inquirer
       .prompt(questions)
       .then(() => {
-        const scriptsPath = getScriptsPackage();
-        const init = require(scriptsPath);
-        init();
+        // const scriptsPath = getScriptsPackage();
+        const appDirPath = getAppDir(name);
+        buildPackageJson(appDirPath, name);
+        installDependencies(appDirPath);
+        const landingScriptsPath = `${appDirPath}/node_modules/landing-scripts`;
+        const init = require(`${landingScriptsPath}/scripts/init`);
+        const templatePath = `${landingScriptsPath}/template`;
+        init(appDirPath, appName, templatePath);
       })
       .catch(err => console.error(err));
   });
