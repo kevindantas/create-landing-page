@@ -1,6 +1,6 @@
 {
   "name": "create-landing-page",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create modern landing pages with no build configuration.",
   "bugs": "https://github.com/kevindantas/create-landing-page/issues",
   "license": "MIT",
@@ -10,6 +10,11 @@
   "bin": {
     "create-landing-page": "./bin/create-landing-page"
   },
+  "files": [
+    "index.js",
+    "checkAppName.js",
+    "questions.js"
+  ],
   "preferGlobal": true,
   "dependencies": {
     "chalk": "^2.1.0",
