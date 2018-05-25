@@ -6,7 +6,7 @@ const commander = require('commander');
 const { execSync, spawnSync } = require('child_process');
 const questions = require('./questions');
 const checkAppName = require('./checkAppName');
-const packageJson = require('../package.json');
+const packageJson = require('./package.json');
 
 let appName;
 const program = commander
@@ -30,8 +30,6 @@ if (!appName) {
 }
 
 const getAppDir = name => `${process.cwd()}/${name}`;
-
-const getScriptsPackage = () => `${getAppDir()}/node_modules/landing-scripts/scripts/init.js`;
 
 function shouldUseYarn() {
   try {
