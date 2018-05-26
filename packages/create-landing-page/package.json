@@ -1,6 +1,6 @@
 {
   "name": "create-landing-page",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Create modern landing pages with no build configuration.",
   "bugs": "https://github.com/kevindantas/create-landing-page/issues",
   "license": "MIT",
@@ -20,6 +20,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
+    "cross-spawn": "^6.0.5",
     "fs-extra": "^4.0.2",
     "inquirer": "^3.2.3"
   },

@@ -5,7 +5,8 @@ const path = require('path');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const commander = require('commander');
-const { execSync, spawnSync } = require('child_process');
+const { execSync } = require('child_process');
+const spawn = require('cross-spawn');
 const questions = require('./questions');
 const checkAppName = require('./checkAppName');
 const packageJson = require('./package.json');
@@ -68,7 +69,7 @@ function installDependencies(appDirPath) {
 
   args.push('landing-scripts');
 
-  spawnSync(command, args, {
+  spawn.sync(command, args, {
     stdio: 'inherit',
   });
 }
