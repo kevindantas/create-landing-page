@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
@@ -13,6 +13,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
+    "chalk": "^2.4.1",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "fs-extra": "^6.0.1",

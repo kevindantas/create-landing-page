@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const chalk = require('chalk');
 
 function copyTemplate(appDir, templatePath) {
   fs.copySync(templatePath, appDir);
@@ -24,9 +25,17 @@ function addPackageScripts(appDir) {
 }
 
 function init(appDir, appName, templatePath) {
+  const isUsingYarn = fs.existsSync(path.join(appDir, 'yarn.lock'));
+  const command = isUsingYarn ? 'yarn' : 'npm';
+
   copyTemplate(appDir, templatePath);
   addPackageScripts(appDir);
-  console.log(appDir, appName, templatePath);
+  console.log(chalk.green('Project ready!'));
+  console.log();
+  console.log('To start the project typing:');
+  console.log();
+  console.log(chalk.cyan('cd'), appName);
+  console.log(chalk.cyan(command), 'start');
 }
 
 module.exports = init;
