@@ -4,6 +4,7 @@ const chalk = require('chalk');
 
 function copyTemplate(appDir, templatePath) {
   fs.copySync(templatePath, appDir);
+  fs.removeSync('.gitignore');
   fs.moveSync(
     path.join(appDir, 'gitignore'),
     path.join(appDir, '.gitignore'),

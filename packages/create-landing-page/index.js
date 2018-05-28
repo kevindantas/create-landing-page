@@ -3,11 +3,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
-const inquirer = require('inquirer');
 const commander = require('commander');
 const { execSync } = require('child_process');
 const spawn = require('cross-spawn');
-const questions = require('./questions');
 const checkAppName = require('./checkAppName');
 const packageJson = require('./package.json');
 
@@ -77,19 +75,14 @@ function installDependencies(appDirPath) {
 function createLanding(name) {
   // Check if exists a folder with the given app name
   checkAppName(name).then(() => {
-    inquirer
-      .prompt(questions)
-      .then(() => {
-        // const scriptsPath = getScriptsPackage();
-        const appDirPath = getAppDir(name);
-        buildPackageJson(appDirPath, name);
-        installDependencies(appDirPath);
-        const landingScriptsPath = `${appDirPath}/node_modules/landing-scripts`;
-        const init = require(`${landingScriptsPath}/scripts/init`);
-        const templatePath = `${landingScriptsPath}/template`;
-        init(appDirPath, appName, templatePath);
-      })
-      .catch(err => console.error(err));
+    // const scriptsPath = getScriptsPackage();
+    const appDirPath = getAppDir(name);
+    buildPackageJson(appDirPath, name);
+    installDependencies(appDirPath);
+    const landingScriptsPath = `${appDirPath}/node_modules/landing-scripts`;
+    const init = require(`${landingScriptsPath}/scripts/init`);
+    const templatePath = `${landingScriptsPath}/template`;
+    init(appDirPath, appName, templatePath);
   });
 }
 createLanding(appName);
