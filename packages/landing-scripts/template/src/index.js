@@ -5,6 +5,6 @@
  */
 
 // Import your Sass
-import './index.scss';
+import './styles/index.scss';
 // And CSS files
-import './index.css';
+import './styles/index.css';
