@@ -8,7 +8,7 @@ const inquirer = require('inquirer');
  * @param {String} name Folder name
  */
 function generateAppFolder(name) {
-  console.log(fs.ensureDirSync(name));
+  fs.ensureDirSync(name);
   console.log(chalk.green('Folder ready!'));
 }
 
