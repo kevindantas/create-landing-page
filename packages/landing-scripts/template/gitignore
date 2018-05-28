@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Production folder
+/build
+
+# Misc
+.DS_STORE
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

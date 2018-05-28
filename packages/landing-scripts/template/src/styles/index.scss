@@ -1,0 +1,39 @@
+@import './button';
+
+#banner {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  
+  h1 {
+    text-transform: uppercase;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: lighter;
+  }
+  
+  p {
+    font-size: 1.4rem;
+  }
+
+  .buttons-wrapper {
+    margin-top: 4rem;
+  }
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+#powered-by {
+  text-align: center;
+
+  img {
+    width: 20%;
+    margin: 0 5%;
+    vertical-align: middle;
+  }
+}

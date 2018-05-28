@@ -1,0 +1,25 @@
+.button {
+  background: #fff;
+  color: #000;
+  display: inline-block;
+  padding: 20px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,.1);
+  transition: box-shadow 0.2s ease-in;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,.2);
+  }
+
+  i.github-icon {
+    width: 24px;
+    height: 24px;
+    background: url(../images/github.svg);
+    background-size: cover;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
