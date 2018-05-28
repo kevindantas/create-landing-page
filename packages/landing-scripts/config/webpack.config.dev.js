@@ -8,7 +8,6 @@ module.exports = merge(baseConfig, {
   mode: 'development',
   devServer: {
     hot: true,
-    open: true,
     contentBase: paths.appOutput,
     watchContentBase: true,
   },

@@ -8,6 +8,14 @@ function createDevServer() {
   return WebpackServe({
     config,
     port: 3000,
+    quiet: true,
+    open: true,
+    dev: {
+      logLevel: 'silent',
+    },
+    hot: {
+      logLevel: 'silent',
+    },
   });
 }
 

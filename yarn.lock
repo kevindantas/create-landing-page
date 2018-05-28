@@ -246,6 +246,10 @@ ansi-align@^2.0.0:
   dependencies:
     string-width "^2.0.0"
 
+ansi-colors@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-2.0.1.tgz#592299d94d1c403642098ec4fd7b7f2d8895a957"
+
 ansi-escapes@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-2.0.0.tgz#5bae52be424878dd9783e8910e3fc2922e83c81b"
@@ -1513,6 +1517,10 @@ console-browserify@^1.1.0:
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
   dependencies:
     date-now "^0.1.4"
+
+console-clear@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/console-clear/-/console-clear-1.1.0.tgz#d5d381b813c80d14d2cce169449585639d31325a"
 
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
@@ -6656,6 +6664,12 @@ webpack-dev-middleware@^3.0.0:
     url-join "^4.0.0"
     webpack-log "^1.0.1"
 
+webpack-format-messages@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/webpack-format-messages/-/webpack-format-messages-2.0.1.tgz#81650be9836241f485e2a59a3c13b60e59bc3493"
+  dependencies:
+    ansi-colors "^2.0.1"
+
 webpack-hot-client@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/webpack-hot-client/-/webpack-hot-client-3.0.0.tgz#b714f257a264001275bc1491741685779cde12f2"
@@ -6681,6 +6695,14 @@ webpack-merge@^4.1.2:
   resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.2.tgz#5d372dddd3e1e5f8874f5bf5a8e929db09feb216"
   dependencies:
     lodash "^4.17.5"
+
+webpack-messages@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webpack-messages/-/webpack-messages-2.0.0.tgz#882577360937f1f25f8e389428d8b3744b72d037"
+  dependencies:
+    ansi-colors "^2.0.1"
+    console-clear "^1.0.0"
+    webpack-format-messages "^2.0.0"
 
 webpack-serve@^1.0.2:
   version "1.0.2"
