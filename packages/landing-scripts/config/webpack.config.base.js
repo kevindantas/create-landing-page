@@ -18,11 +18,23 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /.html$/,
+            test: /\.(png|jpg|gif|webp|svg)$/,
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'media/[name].[hash:8].[ext]',
+                },
+              },
+            ],
+          },
+          {
+            test: /\.html$/,
             use: 'html-loader',
           },
           {
-            test: /.scss$/,
+            test: /\.scss$/,
             use: [
               isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
               'css-loader',
@@ -30,13 +42,22 @@ module.exports = {
             ],
           },
           {
-            test: /.css$/,
+            test: /\.css$/,
             use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
           },
           {
-            test: /.js$/,
+            test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
             use: 'babel-loader',
+          },
+          {
+            exclude: /\.(js|html|css|scss)$/,
+            use: [{
+              loader: 'file-loader',
+              options: {
+                name: 'media/[name].[hash:8].[ext]',
+              },
+            }],
           },
         ],
       },
