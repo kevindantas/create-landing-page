@@ -23,11 +23,11 @@ if (!avaliableScripts.has(scriptName)) {
   process.exit(1);
 }
 
-const { spawnSync } = require('child_process');
+const spawn = require('cross-spawn');
 
 const scriptPath = require.resolve(`../scripts/${scriptName}.js`);
 
-spawnSync('node', [scriptPath], {
+spawn.sync('node', [scriptPath], {
   stdio: 'inherit',
 });
 
