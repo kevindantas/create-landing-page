@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
@@ -9,16 +9,9 @@
   "bin": {
     "landing-scripts": "./bin/landing-scripts.js"
   },
-  "babel": {
-    "presets": [
-      "stage-1"
-    ]
-  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-1": "^6.24.1",
     "chalk": "^2.4.1",
@@ -41,5 +34,17 @@
     "webpack-messages": "^2.0.0",
     "webpack-serve": "^1.0.2"
   },
-  "devDependencies": {}
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
 }
