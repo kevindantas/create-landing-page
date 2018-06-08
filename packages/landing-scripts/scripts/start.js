@@ -3,8 +3,12 @@ process.env.NODE_ENV = 'development';
 
 const fs = require('fs-extra');
 const path = require('path');
+const chalk = require('chalk');
+const webpack = require('webpack');
 const WebpackServe = require('webpack-serve');
 const selfsigned = require('selfsigned');
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const clearConsole = require('react-dev-utils/clearConsole');
 const config = require('../config/webpack.config.dev');
 
 /**
@@ -62,7 +66,6 @@ function getServerConfig(args) {
   }
 
   return {
-    config,
     host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || 3000,
     quiet: true,
@@ -78,10 +81,52 @@ function getServerConfig(args) {
   };
 }
 
+function createCompiler() {
+  const compiler = webpack(config);
+
+  let isFirstCompile = true;
+  compiler.hooks.invalid.tap('Compiling', () => {
+    clearConsole();
+    console.log('Compiling...');
+  });
+
+  // Format messages
+  compiler.hooks.done.tap('FormatMessages', (stats) => {
+    const rawMessages = stats.toJson({}, true);
+    const messages = formatWebpackMessages(rawMessages);
+
+    // If is the first compile don't clearConsole to show the app URL
+    if (!isFirstCompile) clearConsole();
+    isFirstCompile = false;
+
+    if (messages.errors.length) {
+      console.log(chalk.red('Failed to compile.'));
+      messages.errors.forEach(e => console.log(e));
+      return;
+    }
+
+    if (!messages.errors.length && !messages.warnings.length) {
+      console.log(chalk.green('Compiled successfully!'));
+    }
+
+    if (messages.warnings.length) {
+      console.log(chalk.yellow('Compiled with warnings.'));
+      messages.warnings.forEach(w => console.log(w));
+    }
+  });
+
+  return compiler;
+}
+
 function createDevServer() {
   const args = process.argv.slice(2);
   const serverConfig = getServerConfig(args);
-  return WebpackServe(serverConfig);
+
+  const compiler = createCompiler();
+  return WebpackServe({
+    compiler,
+    ...serverConfig,
+  });
 }
 
 createDevServer();
