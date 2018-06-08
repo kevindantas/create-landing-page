@@ -1,3 +1,15 @@
+## 0.4.3 (June 8, 2018)
+
+### New features
+
+- Serve HTTPS with `--https` option enabled.
+- Generate the SSL certificate per instance.
+
+### Fixes
+
+- Use `react-dev-utils` to format webpack messages, removed deprecated `.plugin` webpack usage.
+
+
 ## 0.3.1 (June 6, 2018)
 
 ### New features
