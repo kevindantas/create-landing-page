@@ -1,5 +1,4 @@
 const paths = require('./paths');
-const WebpackMessages = require('webpack-messages');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -74,9 +73,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
-    }),
-    new WebpackMessages({
-      name: 'landing-page',
     }),
   ],
 };
