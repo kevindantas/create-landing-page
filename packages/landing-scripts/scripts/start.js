@@ -76,7 +76,7 @@ function getServerConfig(args) {
     },
     hot: {
       logLevel: 'silent',
-      https: true,
+      https: !!https,
     },
   };
 }
