@@ -1,3 +1,11 @@
+## 0.4.4 (June 10, 2018)
+
+### Fixes
+
+- Fix hot reload to local development server on Windows
+-  Use `react-dev-utils` to improve development server launch
+
+
 ## 0.4.3 (June 8, 2018)
 
 ### New features

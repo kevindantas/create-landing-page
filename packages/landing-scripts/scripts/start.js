@@ -8,7 +8,10 @@ const webpack = require('webpack');
 const WebpackServe = require('webpack-serve');
 const selfsigned = require('selfsigned');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
+const { choosePort, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+
 const config = require('../config/webpack.config.dev');
 
 /**
@@ -56,27 +59,30 @@ function configureHttps() {
  * Get development server config
  * @param {Array<String>} args - Arguments when execute the script
  */
-function getServerConfig(args) {
+function getServerConfig(protocol, host, port) {
   // HTTPS is disabled by default
   let https = false;
 
-  const useHttps = args.indexOf('--https') > -1;
-  if (useHttps) {
+  if (protocol === 'https') {
     https = configureHttps();
   }
 
   return {
-    host: process.env.HOST || '0.0.0.0',
-    port: process.env.PORT || 3000,
+    host,
+    port,
     quiet: true,
-    open: true,
     https,
     dev: {
       logLevel: 'silent',
     },
+    logLevel: 'silent',
     hot: {
       logLevel: 'silent',
       https: !!https,
+      host: {
+        server: '0.0.0.0',
+        client: 'localhost',
+      },
     },
   };
 }
@@ -120,12 +126,26 @@ function createCompiler() {
 
 function createDevServer() {
   const args = process.argv.slice(2);
-  const serverConfig = getServerConfig(args);
-
-  const compiler = createCompiler();
-  return WebpackServe({
-    compiler,
-    ...serverConfig,
+  const protocol = args.indexOf('--https') > -1 ? 'https' : 'http';
+  const host = process.env.HOST || '0.0.0.0';
+  const defaultPort = process.env.PORT || 3000;
+  choosePort(host, defaultPort).then((port) => {
+    if (!port) return false;
+    const serverConfig = getServerConfig(protocol, host, port);
+    const compiler = createCompiler();
+    return WebpackServe({
+      compiler,
+      ...serverConfig,
+    }).then(() => {
+      const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
+      if (openBrowser(urls.localUrlForBrowser)) {
+        clearConsole();
+        console.log('You can view your app on the browser.');
+        console.log();
+        console.log(`Local: \t\t\t${urls.localUrlForTerminal}`);
+        console.log(`On your network: \t${urls.lanUrlForTerminal}`);
+      }
+    });
   });
 }
 
