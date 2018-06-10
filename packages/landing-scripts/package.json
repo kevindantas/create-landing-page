@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.3.0",
+  "version": "0.4.3",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
@@ -12,10 +12,10 @@
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-1": "^6.24.1",
     "chalk": "^2.4.1",
+    "cross-spawn": "^6.0.5",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "file-loader": "^1.1.11",
@@ -25,14 +25,27 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.1",
+    "react-dev-utils": "^5.0.1",
     "sass-loader": "^7.0.1",
+    "selfsigned": "^1.10.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
-    "webpack": "^4.8.3",
+    "webpack": "^4.12.0",
     "webpack-merge": "^4.1.2",
-    "webpack-messages": "^2.0.0",
     "webpack-serve": "^1.0.2"
   },
-  "devDependencies": {}
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
 }

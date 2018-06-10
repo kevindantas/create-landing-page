@@ -13,3 +13,11 @@ create-landing-page awesome-landing
 cd awesome-landing
 npm start
 ```
+
+## Avaliable scripts
+
+```
+$ landing-scripts start
+
+  --https       Enable HTTP on the development server
+```

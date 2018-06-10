@@ -11,7 +11,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 const args = process.argv.slice(2);
-const scriptName = args[0];
+const scriptName = args.shift();
 
 // List of avaliable scripts on landing-scripts
 const avaliableScripts = new Set(['start', 'build', 'deploy']);
@@ -23,11 +23,11 @@ if (!avaliableScripts.has(scriptName)) {
   process.exit(1);
 }
 
-const { spawnSync } = require('child_process');
+const spawn = require('cross-spawn');
 
 const scriptPath = require.resolve(`../scripts/${scriptName}.js`);
 
-spawnSync('node', [scriptPath], {
+spawn.sync('node', [scriptPath, ...args], {
   stdio: 'inherit',
 });
 
