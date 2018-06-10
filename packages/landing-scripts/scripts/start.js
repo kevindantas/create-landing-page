@@ -79,6 +79,10 @@ function getServerConfig(protocol, host, port) {
     hot: {
       logLevel: 'silent',
       https: !!https,
+      host: {
+        server: '0.0.0.0',
+        client: 'localhost',
+      },
     },
   };
 }
