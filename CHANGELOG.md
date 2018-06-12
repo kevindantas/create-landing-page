@@ -1,3 +1,9 @@
+## 0.5.0 (June 11, 2018)
+
+### New features
+
+- Serve static files using `yarn serve` command on the project folder
+
 ## 0.4.5 (June 11, 2018)
 
 ### Fixes
