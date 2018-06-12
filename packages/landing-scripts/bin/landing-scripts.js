@@ -14,7 +14,7 @@ const args = process.argv.slice(2);
 const scriptName = args.shift();
 
 // List of avaliable scripts on landing-scripts
-const avaliableScripts = new Set(['start', 'build', 'deploy']);
+const avaliableScripts = new Set(['start', 'build', 'serve', 'deploy']);
 
 // If the script does not exists, show the information and exit the application
 if (!avaliableScripts.has(scriptName)) {
