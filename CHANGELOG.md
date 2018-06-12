@@ -1,3 +1,11 @@
+## 0.4.5 (June 11, 2018)
+
+### Fixes
+
+- Fix Node production environment
+- Remove MiniCSSPlugin from development config
+
+
 ## 0.4.4 (June 10, 2018)
 
 ### Fixes
