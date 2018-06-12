@@ -1,5 +1,5 @@
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
+process.env.BABEL_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
 const webpack = require('webpack');
 const fs = require('fs-extra');
