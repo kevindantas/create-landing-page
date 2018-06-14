@@ -20,6 +20,7 @@
     "start": "cd packages/landing-scripts/template && node ../bin/landing-scripts.js start",
     "build": "cd packages/landing-scripts/template && node ../bin/landing-scripts.js build",
     "serve": "cd packages/landing-scripts/template && node ../bin/landing-scripts.js serve",
+    "audit": "cd packages/landing-scripts/template && node ../bin/landing-scripts.js audit",
     "lint": "eslint . --fix"
   },
   "devDependencies": {
