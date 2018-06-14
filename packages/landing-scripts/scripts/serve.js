@@ -8,7 +8,7 @@ const httpServer = require('http-server');
 const { prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
 const paths = require('../config/paths');
 
-module.exports = function serve() {
+module.exports = function serve(callback = () => {}) {
   const scriptPath = path.join(__dirname, './build');
   spawn.sync('node', [scriptPath], {
     stdio: 'inherit',
@@ -27,5 +27,10 @@ module.exports = function serve() {
     console.log();
     console.log('Local:\t\t\t', chalk.cyan(urls.localUrlForTerminal));
     console.log('On your network:\t', chalk.cyan(urls.lanUrlForTerminal));
+
+    callback({
+      urls,
+      server,
+    });
   });
 };
