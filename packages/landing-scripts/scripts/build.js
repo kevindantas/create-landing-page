@@ -6,10 +6,8 @@ const fs = require('fs-extra');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.prod');
 
-function build() {
+module.exports = function build() {
   fs.emptyDirSync(paths.appOutput);
   const compiler = webpack(config);
   compiler.run();
-}
-
-build();
+};
