@@ -36,12 +36,21 @@ function getDatetime() {
 
 
 module.exports = function audit() {
+  const flags = process.argv.reduce((args, arg) => {
+    if (arg.indexOf('--') < 0) return args;
+    const flag = arg.replace(/-([a-z])/g, (match, $1) => $1.toUpperCase()).replace(/-([A-Z])/, (match, $1) => $1.toLowerCase());
+    return {
+      ...args,
+      [flag]: true,
+    };
+  }, {});
+
   const serveScriptPath = path.join(__dirname, './serve');
   const serve = require(serveScriptPath);
   console.log(chalk.cyanBright('Starting a local server to audit on lighthouse...'));
   serve(({ urls, server }) => {
     console.log(chalk.cyanBright('Preparing chrome...'));
-    launchChromeAndRunLighthouse(urls.localUrlForBrowser).then((results) => {
+    launchChromeAndRunLighthouse(urls.localUrlForBrowser, flags).then((results) => {
       const reportDate = getDatetime();
       const auditsPath = path.join(process.cwd(), './audits');
       const reportFilename = `lighthouse-report-${reportDate}.html`;
