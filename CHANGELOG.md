@@ -1,3 +1,9 @@
+## 0.6.0 (June 15, 2018)
+
+### New features
+
+- Generate audits using Lighthouse using the `landing-scripts audit` command from the project's `package.json`.
+
 ## 0.5.0 (June 11, 2018)
 
 ### New features
