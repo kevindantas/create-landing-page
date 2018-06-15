@@ -1,8 +1,9 @@
 # Dependencies
 node_modules
 
-# Production folder
+# Generated folders
 /build
+/audits
 
 # Misc
 .DS_STORE

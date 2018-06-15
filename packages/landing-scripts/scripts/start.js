@@ -124,7 +124,7 @@ function createCompiler() {
   return compiler;
 }
 
-function createDevServer() {
+module.exports = function createDevServer() {
   const args = process.argv.slice(2);
   const protocol = args.indexOf('--https') > -1 ? 'https' : 'http';
   const host = process.env.HOST || '0.0.0.0';
@@ -147,6 +147,4 @@ function createDevServer() {
       }
     });
   });
-}
-
-createDevServer();
+};

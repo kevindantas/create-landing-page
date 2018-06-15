@@ -14,7 +14,7 @@ const args = process.argv.slice(2);
 const scriptName = args.shift();
 
 // List of avaliable scripts on landing-scripts
-const avaliableScripts = new Set(['start', 'build', 'serve', 'deploy']);
+const avaliableScripts = new Set(['start', 'build', 'serve', 'audit', 'deploy']);
 
 // If the script does not exists, show the information and exit the application
 if (!avaliableScripts.has(scriptName)) {
@@ -23,11 +23,7 @@ if (!avaliableScripts.has(scriptName)) {
   process.exit(1);
 }
 
-const spawn = require('cross-spawn');
-
 const scriptPath = require.resolve(`../scripts/${scriptName}.js`);
 
-spawn.sync('node', [scriptPath, ...args], {
-  stdio: 'inherit',
-});
-
+const script = require(scriptPath);
+script();

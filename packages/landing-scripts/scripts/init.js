@@ -16,6 +16,7 @@ function addPackageScripts(appDir) {
     start: 'landing-scripts start',
     build: 'landing-scripts build',
     serve: 'landing-scripts serve',
+    audit: 'landing-scripts audit',
   };
 
   const packageJson = require(`${appDir}/package.json`);
