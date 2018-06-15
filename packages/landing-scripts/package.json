@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.5.0",
+  "version": "0.6.0-next",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
