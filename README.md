@@ -16,8 +16,35 @@ npm start
 
 ## Avaliable scripts
 
+
+### start
 ```
 $ landing-scripts start
 
   --https       Enable HTTP on the development server
 ```
+
+
+
+### build
+Generate build files
+```
+$ landing-scripts build
+```
+
+
+### serve
+Serve on production mode the project.
+```
+$ landing-scripts serve
+```
+
+
+### audit
+Generate a Lighthouse report inside the `audits` folder.
+```
+$ landing-scripts audit
+
+  --disable-device-emulation
+```
+

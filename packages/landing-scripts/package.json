@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.4.3",
+  "version": "0.6.0",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
@@ -22,6 +22,8 @@
     "fs-extra": "^6.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "lighthouse": "^2.9.4",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.1",

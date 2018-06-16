@@ -1,3 +1,23 @@
+## 0.6.0 (June 15, 2018)
+
+### New features
+
+- Generate audits using Lighthouse using the `landing-scripts audit` command from the project's `package.json`.
+
+## 0.5.0 (June 11, 2018)
+
+### New features
+
+- Serve static files using `yarn serve` command on the project folder
+
+## 0.4.5 (June 11, 2018)
+
+### Fixes
+
+- Fix Node production environment
+- Remove MiniCSSPlugin from development config
+
+
 ## 0.4.4 (June 10, 2018)
 
 ### Fixes
