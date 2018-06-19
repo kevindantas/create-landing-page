@@ -1,0 +1,13 @@
+{
+  "name": "Landing Page",
+  "short_name": "Landing",
+  "display": "standalone",
+  "background_color": "#eee",
+  "theme_color": "#37474f",
+  "start_url": "/",
+  "icons": [{
+    "src": "./icon.png",
+    "type": "image/png",
+    "sizes": "64x64 32x32 24x24 16x16"
+  }]
+}
