@@ -1,3 +1,10 @@
+## 0.6.1 (June 18, 2018)
+
+### New features
+
+- Add `manifest.json`, to the production the build.
+
+
 ## 0.6.0 (June 15, 2018)
 
 ### New features
