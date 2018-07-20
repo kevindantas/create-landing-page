@@ -14,5 +14,8 @@ cache:
 install:
   - yarn install
 
+before_install:
+  - chmod +x tests/e2e.sh
+
 script:
   - tests/e2e.sh
