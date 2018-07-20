@@ -13,9 +13,9 @@ cache:
   - packages/create-landing-page/node_modules
 
 platform:
- - x64
+  - x64
  
- test_script:
+test_script:
   - bash tests/e2e.sh
 
 skip_commits:
