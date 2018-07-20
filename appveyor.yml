@@ -1,0 +1,23 @@
+image: Visual Studio 2017
+
+environment:
+  nodejs_version: 8
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - yarn install
+
+cache:
+  - node_modules
+  - packages/landing-scripts/node_modules
+  - packages/create-landing-page/node_modules
+
+platform:
+ - x64
+ 
+ test_script:
+  - bash tests/e2e.sh
+
+skip_commits:
+  files:
+    - '**/*.md'
