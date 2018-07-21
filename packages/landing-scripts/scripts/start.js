@@ -72,11 +72,12 @@ function getServerConfig(protocol, host, port) {
     port,
     quiet: true,
     https,
+    clipboard: false,
     dev: {
       logLevel: 'silent',
     },
     logLevel: 'silent',
-    hot: {
+    hotClient: {
       logLevel: 'silent',
       https: !!https,
       host: {
@@ -133,7 +134,7 @@ module.exports = function createDevServer() {
     if (!port) return false;
     const serverConfig = getServerConfig(protocol, host, port);
     const compiler = createCompiler();
-    return WebpackServe({
+    return WebpackServe({}, {
       compiler,
       ...serverConfig,
     }).then(() => {
