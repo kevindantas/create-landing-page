@@ -17,6 +17,5 @@ module.exports = merge(baseConfig, {
       template: paths.appIndexHtml,
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
 });
