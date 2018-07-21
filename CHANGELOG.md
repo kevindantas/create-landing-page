@@ -1,3 +1,10 @@
+## 0.6.2 (July 21, 2018)
+
+### Bugfixes
+
+- Hot reload working with HTTPS option enabled
+
+
 ## 0.6.1 (June 18, 2018)
 
 ### New features
