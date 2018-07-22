@@ -11,12 +11,13 @@ module.exports = merge(baseConfig, {
   entry: paths.appEntry,
   output: {
     path: paths.appOutput,
-    filename: 'static/js/bundle.[hash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    filename: 'js/bundle.[hash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
+    publicPath: paths.appPublicPath,
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[hash:8].css',
+      filename: 'css/[name].[hash:8].css',
       chunkFilename: '[id].[hash:8].css',
     }),
     new HtmlWebpackPlugin({
