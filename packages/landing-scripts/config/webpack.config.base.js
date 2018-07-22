@@ -3,6 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const getStyleLoaders = (aditionalLoaders = []) => [
+  isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+  'css-loader',
+  ...aditionalLoaders,
+];
+
 module.exports = {
   entry: [paths.appEntry, paths.appIndexHtml],
   output: {
@@ -34,15 +40,11 @@ module.exports = {
           },
           {
             test: /\.scss$/,
-            use: [
-              isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-              'css-loader',
-              'sass-loader',
-            ],
+            use: getStyleLoaders(['sass-loader']),
           },
           {
             test: /\.css$/,
-            use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
+            use: getStyleLoaders(),
           },
           {
             test: /\.js$/,
@@ -58,17 +60,18 @@ module.exports = {
           },
           {
             exclude: /\.(js|html|css|scss)$/,
-            use: [{
-              loader: 'file-loader',
-              options: {
-                name: 'media/[name].[hash:8].[ext]',
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'media/[name].[hash:8].[ext]',
+                },
               },
-            }],
+            ],
           },
         ],
       },
     ],
   },
-  plugins: [
-  ],
+  plugins: [],
 };
