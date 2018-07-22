@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
     path: paths.appOutput,
     filename: 'js/bundle.[hash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
-    publicPath: '/',
+    publicPath: paths.appPublicPath,
   },
   plugins: [
     new MiniCssExtractPlugin({
