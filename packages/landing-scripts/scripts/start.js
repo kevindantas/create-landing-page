@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const webpack = require('webpack');
-const WebpackServe = require('webpack-serve');
+const WebpackDevServer = require('webpack-dev-server');
 const selfsigned = require('selfsigned');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const openBrowser = require('react-dev-utils/openBrowser');
@@ -78,19 +78,8 @@ function getServerConfig(protocol, host, port) {
     port,
     quiet: true,
     https,
-    clipboard: false,
-    devMiddleware: {
-      logLevel: 'silent',
-    },
+    hot: true,
     logLevel: 'silent',
-    hotClient: {
-      logLevel: 'silent',
-      https: !!https,
-      host: {
-        server: '0.0.0.0',
-        client: 'localhost',
-      },
-    },
   };
 }
 
@@ -140,12 +129,12 @@ module.exports = function createDevServer() {
     const serverConfig = getServerConfig(protocol, host, port);
     const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
     const compiler = createCompiler(urls);
-    return WebpackServe(
-      {},
-      {
-        compiler,
-        ...serverConfig,
-      },
-    ).then(() => openBrowser(urls.localUrlForBrowser));
+    const server = new WebpackDevServer(
+      compiler,
+      serverConfig,
+    );
+    return server.listen(port, host, () => {
+      openBrowser(urls.localUrlForBrowser);
+    });
   });
 };
