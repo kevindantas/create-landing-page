@@ -11,6 +11,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const { choosePort, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 
 /**
@@ -76,7 +77,6 @@ function getServerConfig(protocol, host, port) {
   return {
     host,
     port,
-    quiet: true,
     https,
     hot: true,
     logLevel: 'silent',
@@ -127,6 +127,7 @@ module.exports = function createDevServer() {
   choosePort(host, defaultPort).then((port) => {
     if (!port) return false;
     const serverConfig = getServerConfig(protocol, host, port);
+    console.log(serverConfig)
     const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
     const compiler = createCompiler(urls);
     const server = new WebpackDevServer(

@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: [paths.appEntry, paths.appIndexHtml],
   output: {
     path: paths.appOutput,
     filename: 'bundle.js',

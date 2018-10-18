@@ -7,10 +7,15 @@ const utils = require('./utils');
 module.exports = merge(baseConfig, {
   mode: 'development',
   devServer: {
-    hot: true,
-    contentBase: paths.appOutput,
+    logLevel: 'silent',
+    contentBase: paths.appSrc,
     watchContentBase: true,
   },
+  entry: [
+    require.resolve('react-dev-utils/webpackHotDevClient'),
+    paths.appEntry,
+    paths.appIndexHtml,
+  ],
   plugins: [
     ...utils.getHtmlPages(paths.appSrc),
     new webpack.NamedModulesPlugin(),
