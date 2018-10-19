@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'development';
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
+const chokidar = require('chokidar');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const selfsigned = require('selfsigned');
@@ -119,6 +120,24 @@ function createCompiler(urls) {
   return compiler;
 }
 
+function watchFolderChanges(ignored, callback) {
+  const watcher = chokidar.watch(paths.appSrc, {
+    // ignored,
+  });
+  watcher.on('add', () => {
+    console.log('New file');
+    callback();
+  });
+  watcher.on('change', () => {
+    console.log('File changed');
+    callback();
+  });
+  watcher.on('unlink', () => {
+    console.log('File unlinked');
+    callback();
+  });
+}
+
 module.exports = function createDevServer() {
   const args = process.argv.slice(2);
   const protocol = args.indexOf('--https') > -1 ? 'https' : 'http';
@@ -127,13 +146,13 @@ module.exports = function createDevServer() {
   choosePort(host, defaultPort).then((port) => {
     if (!port) return false;
     const serverConfig = getServerConfig(protocol, host, port);
-    console.log(serverConfig)
     const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
     const compiler = createCompiler(urls);
     const server = new WebpackDevServer(
       compiler,
       serverConfig,
     );
+    watchFolderChanges(/.*\.(?!html|hbs|handlebars|htm)/, () => server.middleware.invalidate());
     return server.listen(port, host, () => {
       openBrowser(urls.localUrlForBrowser);
     });
