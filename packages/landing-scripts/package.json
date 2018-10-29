@@ -1,6 +1,6 @@
 {
   "name": "landing-scripts",
-  "version": "0.6.1",
+  "version": "0.6.3",
   "description": "Scripts for the landing page",
   "main": "index.js",
   "repository": "https://github.com/kevindantas/create-landing-page",
@@ -15,6 +15,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-1": "^6.24.1",
     "chalk": "^2.4.1",
+    "chokidar": "^2.0.4",
     "cross-spawn": "^6.0.5",
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
@@ -27,15 +28,15 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.1",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^6.0.5",
     "sass-loader": "^7.0.1",
     "selfsigned": "^1.10.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
-    "webpack": "^4.12.0",
-    "webpack-merge": "^4.1.2",
-    "webpack-serve": "^1.0.2"
+    "webpack": "^4.21.0",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.2"
   },
   "browserslist": {
     "development": [
