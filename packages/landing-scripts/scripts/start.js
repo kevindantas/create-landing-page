@@ -4,13 +4,15 @@ process.env.NODE_ENV = 'development';
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
+const chokidar = require('chokidar');
 const webpack = require('webpack');
-const WebpackServe = require('webpack-serve');
+const WebpackDevServer = require('webpack-dev-server');
 const selfsigned = require('selfsigned');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const { choosePort, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 
 /**
@@ -76,21 +78,9 @@ function getServerConfig(protocol, host, port) {
   return {
     host,
     port,
-    quiet: true,
     https,
-    clipboard: false,
-    devMiddleware: {
-      logLevel: 'silent',
-    },
+    hot: true,
     logLevel: 'silent',
-    hotClient: {
-      logLevel: 'silent',
-      https: !!https,
-      host: {
-        server: '0.0.0.0',
-        client: 'localhost',
-      },
-    },
   };
 }
 
@@ -130,6 +120,24 @@ function createCompiler(urls) {
   return compiler;
 }
 
+function watchFolderChanges(ignored, callback) {
+  const watcher = chokidar.watch(paths.appSrc, {
+    // ignored,
+  });
+  watcher.on('add', () => {
+    console.log('New file');
+    callback();
+  });
+  watcher.on('change', () => {
+    console.log('File changed');
+    callback();
+  });
+  watcher.on('unlink', () => {
+    console.log('File unlinked');
+    callback();
+  });
+}
+
 module.exports = function createDevServer() {
   const args = process.argv.slice(2);
   const protocol = args.indexOf('--https') > -1 ? 'https' : 'http';
@@ -140,12 +148,13 @@ module.exports = function createDevServer() {
     const serverConfig = getServerConfig(protocol, host, port);
     const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
     const compiler = createCompiler(urls);
-    return WebpackServe(
-      {},
-      {
-        compiler,
-        ...serverConfig,
-      },
-    ).then(() => openBrowser(urls.localUrlForBrowser));
+    const server = new WebpackDevServer(
+      compiler,
+      serverConfig,
+    );
+    watchFolderChanges(/.*\.(?!html|hbs|handlebars|htm)/, () => server.middleware.invalidate());
+    return server.listen(port, host, () => {
+      openBrowser(urls.localUrlForBrowser);
+    });
   });
 };
