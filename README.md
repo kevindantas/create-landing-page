@@ -1,4 +1,5 @@
 # Create Landing Page
+[![Build Status](https://travis-ci.org/kevindantas/create-landing-page.svg?branch=master)](https://travis-ci.org/kevindantas/create-landing-page)
 
 Skip all setup to create a static landing page.
 
