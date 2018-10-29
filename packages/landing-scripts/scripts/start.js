@@ -4,14 +4,15 @@ process.env.NODE_ENV = 'development';
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
+const chokidar = require('chokidar');
 const webpack = require('webpack');
-const WebpackServe = require('webpack-serve');
+const WebpackDevServer = require('webpack-dev-server');
 const selfsigned = require('selfsigned');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const openBrowser = require('react-dev-utils/openBrowser');
 const clearConsole = require('react-dev-utils/clearConsole');
 const { choosePort, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
-
+const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 
 /**
@@ -55,6 +56,13 @@ function configureHttps() {
   };
 }
 
+function printInstructions(urls) {
+  console.log('You can view your app on the browser.');
+  console.log();
+  console.log(`Local: \t\t\t${urls.localUrlForTerminal}`);
+  console.log(`On your network: \t${urls.lanUrlForTerminal}`);
+}
+
 /**
  * Get development server config
  * @param {Array<String>} args - Arguments when execute the script
@@ -70,40 +78,27 @@ function getServerConfig(protocol, host, port) {
   return {
     host,
     port,
-    quiet: true,
     https,
-    dev: {
-      logLevel: 'silent',
-    },
+    hot: true,
     logLevel: 'silent',
-    hot: {
-      logLevel: 'silent',
-      https: !!https,
-      host: {
-        server: '0.0.0.0',
-        client: 'localhost',
-      },
-    },
   };
 }
 
-function createCompiler() {
+function createCompiler(urls) {
   const compiler = webpack(config);
 
-  let isFirstCompile = true;
-  compiler.hooks.invalid.tap('Compiling', () => {
+  compiler.hooks.invalid.tap('invalid', () => {
     clearConsole();
     console.log('Compiling...');
   });
 
-  // Format messages
-  compiler.hooks.done.tap('FormatMessages', (stats) => {
+
+  compiler.hooks.done.tap('done', (stats) => {
+    // Clear the old console messages
+    clearConsole();
+
     const rawMessages = stats.toJson({}, true);
     const messages = formatWebpackMessages(rawMessages);
-
-    // If is the first compile don't clearConsole to show the app URL
-    if (!isFirstCompile) clearConsole();
-    isFirstCompile = false;
 
     if (messages.errors.length) {
       console.log(chalk.red('Failed to compile.'));
@@ -113,6 +108,7 @@ function createCompiler() {
 
     if (!messages.errors.length && !messages.warnings.length) {
       console.log(chalk.green('Compiled successfully!'));
+      printInstructions(urls);
     }
 
     if (messages.warnings.length) {
@@ -124,6 +120,24 @@ function createCompiler() {
   return compiler;
 }
 
+function watchFolderChanges(ignored, callback) {
+  const watcher = chokidar.watch(paths.appSrc, {
+    // ignored,
+  });
+  watcher.on('add', () => {
+    console.log('New file');
+    callback();
+  });
+  watcher.on('change', () => {
+    console.log('File changed');
+    callback();
+  });
+  watcher.on('unlink', () => {
+    console.log('File unlinked');
+    callback();
+  });
+}
+
 module.exports = function createDevServer() {
   const args = process.argv.slice(2);
   const protocol = args.indexOf('--https') > -1 ? 'https' : 'http';
@@ -132,19 +146,15 @@ module.exports = function createDevServer() {
   choosePort(host, defaultPort).then((port) => {
     if (!port) return false;
     const serverConfig = getServerConfig(protocol, host, port);
-    const compiler = createCompiler();
-    return WebpackServe({
+    const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
+    const compiler = createCompiler(urls);
+    const server = new WebpackDevServer(
       compiler,
-      ...serverConfig,
-    }).then(() => {
-      const urls = prepareUrls(protocol, serverConfig.host, serverConfig.port);
-      if (openBrowser(urls.localUrlForBrowser)) {
-        clearConsole();
-        console.log('You can view your app on the browser.');
-        console.log();
-        console.log(`Local: \t\t\t${urls.localUrlForTerminal}`);
-        console.log(`On your network: \t${urls.lanUrlForTerminal}`);
-      }
+      serverConfig,
+    );
+    watchFolderChanges(/.*\.(?!html|hbs|handlebars|htm)/, () => server.middleware.invalidate());
+    return server.listen(port, host, () => {
+      openBrowser(urls.localUrlForBrowser);
     });
   });
 };

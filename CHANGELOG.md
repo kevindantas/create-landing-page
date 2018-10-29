@@ -1,3 +1,21 @@
+## 0.6.3 (July 22, 2018)
+
+### New features
+
+- You can add `homepage` field to `package.json` to customize the Webpack's `publicPath`.
+
+### Bugfixes
+
+- Images used on the CSS files were not loaded
+
+
+## 0.6.2 (July 21, 2018)
+
+### Bugfixes
+
+- Hot reload working with HTTPS option enabled
+
+
 ## 0.6.1 (June 18, 2018)
 
 ### New features
