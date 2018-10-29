@@ -1,3 +1,14 @@
+## 0.7.0 (October 29, 2018)
+
+### New features
+
+- Support multiple HTML pages.
+
+## Changes
+
+- Use `webpack-dev-server` as developer server (`webpack-server` has been deprecated)
+
+
 ## 0.6.3 (July 22, 2018)
 
 ### New features
